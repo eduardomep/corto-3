@@ -79,33 +79,3 @@ def validar_nit(nit):
 
     except:
         return False
-
-
-# Codigo extra
-
-@app.route('/pokemon', methods=['GET','POST'])
-def pokemon():
-
-	response = {}
-
-	if request.method == 'POST':
-
-		nombre_p = request.form.get('nombre_poke')
-		especie_p = request.form.get('especie_poke')
-		tipo_p = request.form.get('tipo_poke')
-		foto_p = request.form.get('foto_poke')
-
-		if mis_pokemon.crear(nombre_p,especie_p,tipo_p,foto_p) == True:
-
-			response['estado'] = 1
-			return response
-
-		response['estado'] = 0
-		return response
-
-	if request.method == 'GET':
-
-		return  mis_pokemon.devolver_pokemon()
-
-if __name__ == "__main__":
-	app.run(threaded=True, port=5000,debug=True)
